@@ -1,137 +1,222 @@
-* { box-sizing:border-box; margin:0; padding:0; font-family:'Roboto',sans-serif; }
+/* Existing CSS */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+}
 body {
-  background: linear-gradient(160deg,#89f7fe,#66a6ff);
-  min-height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  padding:20px;
+  background: linear-gradient(160deg, #89f7fe, #66a6ff);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
 }
 .container {
-  width:100%;
-  max-width:800px;
-  background: rgba(255,255,255,0.1);
+  width: 100%;
+  max-width: 800px;
+  background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(15px);
   border-radius: 20px;
-  padding: 30px 40px;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+  padding: 30px 40px; /* Default desktop padding */
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
   animation: fadeIn 1s ease forwards;
 }
 h2 {
-  text-align:center;
-  color:#fff;
-  font-size:2rem;
-  margin-bottom:20px;
-  text-shadow:0 2px 6px rgba(0,0,0,0.2);
+  text-align: center;
+  color: #fff;
+  font-size: 2rem;
+  margin-bottom: 20px;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 .input-section label {
-  display:block;
-  font-weight:500;
-  margin-top:15px;
-  color:#fff;
-  font-size:0.95rem;
-  letter-spacing:0.5px;
+  display: block;
+  font-weight: 500;
+  margin-top: 15px;
+  color: #fff;
+  font-size: 0.95rem;
+  letter-spacing: 0.5px;
 }
-.input-section input, .input-section textarea {
-  width:100%;
-  padding:14px 16px;
-  margin-top:6px;
-  border:none;
-  border-radius:12px;
-  font-size:1rem;
-  background: rgba(255,255,255,0.2);
-  color:#fff;
-  outline:none;
+.input-section input,
+.input-section textarea {
+  width: 100%;
+  padding: 14px 16px;
+  margin-top: 6px;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  outline: none;
   transition: all 0.3s ease;
 }
-.input-section input::placeholder, .input-section textarea::placeholder {
-  color: rgba(255,255,255,0.7);
+.input-section input::placeholder,
+.input-section textarea::placeholder {
+  color: rgba(255, 255, 255, 0.7);
 }
-.input-section input:focus, .input-section textarea:focus {
-  background: rgba(255,255,255,0.35);
-  box-shadow: 0 0 10px rgba(255,255,255,0.4);
+.input-section input:focus,
+.input-section textarea:focus {
+  background: rgba(255, 255, 255, 0.35);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
 }
 .options-grid {
-  display:grid;
-  grid-template-columns: repeat(auto-fit,minmax(120px,1fr));
-  gap:12px;
-  margin-top:10px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); /* Desktop grid */
+  gap: 12px;
+  margin-top: 10px;
 }
 .option-card {
-  background: rgba(255,255,255,0.15);
-  border-radius:16px;
-  text-align:center;
-  padding:16px 10px;
-  cursor:pointer;
-  font-size:1rem;
-  font-weight:500;
-  color:#fff;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 16px;
+  text-align: center;
+  padding: 16px 10px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #fff;
   transition: all 0.3s ease;
   backdrop-filter: blur(10px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 .option-card:hover {
   transform: translateY(-4px) scale(1.05);
-  background: rgba(255,255,255,0.25);
-  box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
 }
 .option-card.active {
-  background: linear-gradient(135deg,#00f0a5,#00c3ff);
-  color:#fff;
-  box-shadow: 0 8px 20px rgba(0,255,180,0.6);
+  background: linear-gradient(135deg, #00f0a5, #00c3ff);
+  color: #fff;
+  box-shadow: 0 8px 20px rgba(0, 255, 180, 0.6);
   transform: scale(1.05);
 }
-.input-section button, #downloadBtn {
-  margin-top:20px;
-  padding:16px;
-  border:none;
-  border-radius:14px;
-  width:100%;
-  font-size:1.1rem;
-  font-weight:600;
-  cursor:pointer;
-  color:#fff;
-  background: linear-gradient(135deg,#00c3ff,#00f0a5);
-  box-shadow:0 6px 20px rgba(0,195,255,0.4);
+.input-section button,
+#downloadBtn {
+  margin-top: 20px;
+  padding: 16px;
+  border: none;
+  border-radius: 14px;
+  width: 100%;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  color: #fff;
+  background: linear-gradient(135deg, #00c3ff, #00f0a5);
+  box-shadow: 0 6px 20px rgba(0, 195, 255, 0.4);
   transition: all 0.4s ease;
 }
-.input-section button:hover, #downloadBtn:hover {
+.input-section button:hover,
+#downloadBtn:hover {
   transform: scale(1.03);
-  box-shadow:0 10px 25px rgba(0,255,180,0.5);
+  box-shadow: 0 10px 25px rgba(0, 255, 180, 0.5);
 }
 .output-box {
-  margin-top:30px;
-  padding:20px;
-  border-radius:16px;
-  background: rgba(255,255,255,0.15);
-  color:#fff;
-  font-size:1rem;
-  line-height:1.6;
-  min-height:100px;
+  margin-top: 30px;
+  padding: 20px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  font-size: 1rem;
+  line-height: 1.6;
+  min-height: 100px;
   white-space: pre-wrap;
-  box-shadow: inset 0 2px 8px rgba(0,0,0,0.2);
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.2);
   transition: all 0.5s ease;
 }
 .output-box.show {
-  opacity:1;
+  opacity: 1;
   transform: scale(1);
 }
 .weather-animation {
   position: fixed;
-  top:20px;
-  right:20px;
-  font-size:50px;
-  z-index:1000;
-  pointer-events:none;
-  opacity:0;
-  animation: fadeIn 0.8s forwards,bounce 1s ease;
+  top: 20px;
+  right: 20px;
+  font-size: 50px;
+  z-index: 1000;
+  pointer-events: none;
+  opacity: 0;
+  animation: fadeIn 0.8s forwards, bounce 1s ease;
 }
 .weather-bg {
   position: fixed;
-  top:0; left:0;
-  width:100%; height:100%;
-  z-index:-1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
   transition: background 1s ease;
 }
-@keyframes fadeIn { from{opacity:0;} to{opacity:1;} }
-@keyframes bounce { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-8px);} }
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+/* =================================================
+  ✨ Mobile View Optimization (Max-width: 600px)
+=================================================
+*/
+@media (max-width: 600px) {
+  body {
+    /* Ensure the body scroll vertically if needed and center the content */
+    align-items: flex-start; 
+    padding: 10px; /* Reduce overall body padding */
+  }
+  .container {
+    padding: 20px; /* Reduce internal padding for a better fit */
+    border-radius: 12px;
+  }
+  h2 {
+    font-size: 1.5rem; /* Smaller title */
+    margin-bottom: 15px;
+  }
+  .input-section label {
+    font-size: 0.9rem; /* Slightly smaller labels */
+  }
+  .input-section input,
+  .input-section textarea,
+  .input-section button,
+  #downloadBtn {
+    font-size: 0.95rem; /* Slightly smaller text in inputs/buttons */
+    padding: 12px; /* Slightly less padding on inputs/buttons */
+  }
+  .options-grid {
+    /* Use 2 columns on very small screens for better card visibility */
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 8px; /* Reduce gap between options */
+  }
+  .option-card {
+    padding: 12px 6px; /* Reduced card padding */
+    font-size: 0.85rem; /* Smaller card text */
+    border-radius: 10px;
+  }
+  .option-card br {
+    display: none; /* Hide <br> tags in option cards for a tighter fit (e.g., "🧍 Solo" on one line) */
+  }
+  /* Remove hover effects on mobile for better touch experience */
+  .option-card:hover {
+    transform: none; 
+    background: rgba(255, 255, 255, 0.15); /* Revert background */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Revert shadow */
+  }
+  .input-section button:hover, 
+  #downloadBtn:hover {
+    transform: none; /* Disable button scaling on hover/touch */
+    box-shadow: 0 6px 20px rgba(0, 195, 255, 0.4); /* Revert shadow */
+  }
+  .weather-animation {
+    font-size: 40px; /* Smaller weather icon */
+  }
+}

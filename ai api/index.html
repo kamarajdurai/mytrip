@@ -3,55 +3,60 @@
 <head>
   <meta charset="UTF-8">
   <title>☀️ Tamil Nadu Travel Planner</title>
-  <link rel="stylesheet" href="style.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
-    <h2>🌤 Tamil Nadu Travel Planner</h2>
-    <div class="input-section">
-      <label for="cityInput">City:</label>
-      <input type="text" id="cityInput" placeholder="Enter city (e.g., Ooty, Madurai)">
 
-      <label for="startDate">Start Date:</label>
-      <input type="date" id="startDate">
+<div class="container">
+  <h2>🌤 Tamil Nadu Travel Planner</h2>
+  <div class="input-section">
+    <label for="cityInput">City:</label>
+    <input type="text" id="cityInput" placeholder="Enter city (e.g., Ooty, Madurai)">
 
-      <label for="endDate">End Date:</label>
-      <input type="date" id="endDate">
+    <label for="startDate">Start Date:</label>
+    <input type="date" id="startDate">
 
-      <label>Travel Type:</label>
-      <div class="options-grid" id="travelTypeOptions">
-        <div class="option-card" data-value="solo">🧍<br>Solo</div>
-        <div class="option-card" data-value="partner">💑<br>Couple</div>
-        <div class="option-card active" data-value="family">👨‍👩‍👧<br>Family</div>
-        <div class="option-card" data-value="friends">👫<br>Friends</div>
-      </div>
+    <label for="endDate">End Date:</label>
+    <input type="date" id="endDate">
 
-      <label>Budget Preference:</label>
-      <div class="options-grid" id="budgetOptions">
-        <div class="option-card" data-value="cheap">💰<br>Cheap</div>
-        <div class="option-card active" data-value="moderate">⚖️<br>Moderate</div>
-        <div class="option-card" data-value="luxury">💎<br>Luxury</div>
-      </div>
-
-      <label>Place Type:</label>
-      <div class="options-grid" id="placeTypeOptions">
-        <div class="option-card active" data-value="mixed">🎯 Mixed</div>
-        <div class="option-card" data-value="adventure">🏞 Adventure</div>
-        <div class="option-card" data-value="waterfall">💧 Waterfall</div>
-        <div class="option-card" data-value="temple">⛪ Temple</div>
-      </div>
-
-      <label for="customPrompt">Custom Prompt:</label>
-      <textarea id="customPrompt" rows="4" placeholder="e.g. Visiting Madurai Meenakshi Temple. Weather & plan?"></textarea>
-
-      <button onclick="generatePlan()">✨ Get Travel Plan</button>
+    <label>Travel Type:</label>
+    <div class="options-grid" id="travelTypeOptions">
+      <div class="option-card" data-value="solo">🧍<br>Solo</div>
+      <div class="option-card" data-value="partner">💑<br>Couple</div>
+      <div class="option-card active" data-value="family">👨‍👩‍👧<br>Family</div>
+      <div class="option-card" data-value="friends">👫<br>Friends</div>
     </div>
 
-    <div id="output" class="output-box">Waiting for input...</div>
-    <button id="downloadBtn" style="display:none;" onclick="downloadPDF()">⬇️ Download PDF</button>
+    <label>Budget Preference:</label>
+    <div class="options-grid" id="budgetOptions">
+      <div class="option-card" data-value="cheap">💰<br>Cheap</div>
+      <div class="option-card active" data-value="moderate">⚖️<br>Moderate</div>
+      <div class="option-card" data-value="luxury">💎<br>Luxury</div>
+    </div>
+
+    <label>Place Type:</label>
+    <div class="options-grid" id="placeTypeOptions">
+      <div class="option-card active" data-value="mixed">🎯 Mixed</div>
+      <div class="option-card" data-value="adventure">🏞 Adventure</div>
+      <div class="option-card" data-value="waterfall">💧 Waterfall</div>
+      <div class="option-card" data-value="temple">⛪ Temple</div>
+    </div>
+
+    <label for="customPrompt">Custom Prompt:</label>
+    <textarea id="customPrompt" rows="4" placeholder="e.g. Visiting Madurai Meenakshi Temple. Weather & plan?"></textarea>
+
+    <button onclick="generatePlan()">✨ Get Travel Plan</button>
   </div>
 
-  <script src="script.js"></script>
+  <div id="output" class="output-box">Waiting for input...</div>
+  <button id="downloadBtn" style="display:none;" onclick="downloadPDF()">⬇️ Download PDF</button>
+</div>
+
+<script src="k.js"></script>
+
 </body>
 </html>
