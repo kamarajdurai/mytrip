@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>☀️ Tamil Nadu Travel Planner</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+  <h2>🌤 Tamil Nadu Travel Planner</h2>
+
+  <div class="input-section">
+    <label for="cityInput">City:</label>
+    <input type="text" id="cityInput" placeholder="Enter city (e.g., Ooty, Madurai)" />
+
+    <label for="startDate">Start Date:</label>
+    <input type="date" id="startDate" />
+
+    <label for="endDate">End Date:</label>
+    <input type="date" id="endDate" />
+
+    <label>Travel Type:</label>
+    <div class="options-grid" id="travelTypeOptions">
+      <div class="option-card" data-value="solo">🧍<br>Solo</div>
+      <div class="option-card" data-value="partner">💑<br>Couple</div>
+      <div class="option-card active" data-value="family">👨‍👩‍👧<br>Family</div>
+      <div class="option-card" data-value="friends">👫<br>Friends</div>
+    </div>
+
+    <label>Budget Preference:</label>
+    <div class="options-grid" id="budgetOptions">
+      <div class="option-card" data-value="cheap">💰<br>Cheap</div>
+      <div class="option-card active" data-value="moderate">⚖️<br>Moderate</div>
+      <div class="option-card" data-value="luxury">💎<br>Luxury</div>
+    </div>
+
+    <label for="customPrompt">Or type your own prompt:</label>
+    <textarea id="customPrompt" rows="4" placeholder="e.g. I'm visiting Madurai Meenakshi Temple today. What's the weather and backup plans?"></textarea>
+
+    <button onclick="generatePlan()">✨ Get Travel Plan</button>
+  </div>
+
+  <div id="output" class="output-box">Waiting for input...</div>
+  <button id="downloadBtn" style="display:none;" onclick="downloadPDF()">⬇️ Download PDF</button>
+</div>
+
+<script src="k.js"></script>
+</body>
+</html>

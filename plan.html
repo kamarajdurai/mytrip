@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trip Planner</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; background: #f7f7f7; }
+    h1 { text-align: center; }
+    form { max-width: 600px; margin: 0 auto; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);}
+    label { display: block; margin-top: 10px; }
+    input, select, button { width: 100%; padding: 8px; margin-top: 5px; }
+    .results { max-width: 800px; margin: 20px auto; }
+    .place { background: #fff; padding: 15px; margin-bottom: 15px; border-radius: 8px; box-shadow: 0 3px 10px rgba(0,0,0,0.1);}
+    .place img { max-width: 100%; border-radius: 8px; }
+  </style>
+</head>
+<body>
+  <h1>Trip Planner</h1>
+  <form id="tripForm">
+    <label>City:</label>
+    <input type="text" id="city" required>
+
+    <label>Start Date:</label>
+    <input type="date" id="startDate" required>
+
+    <label>End Date:</label>
+    <input type="date" id="endDate" required>
+
+    <label>Travel Type:</label>
+    <select id="travelType" required>
+      <option value="adventure">Adventure</option>
+      <option value="leisure">Leisure</option>
+      <option value="cultural">Cultural</option>
+      <option value="romantic">Romantic</option>
+    </select>
+
+    <label>Budget Preference:</label>
+    <select id="budget" required>
+      <option value="low">Low</option>
+      <option value="medium">Medium</option>
+      <option value="high">High</option>
+    </select>
+
+    <button type="submit">Generate Plan</button>
+  </form>
+
+  <div class="results" id="results"></div>
+  <button id="downloadPDF" style="display:none;">Download PDF</button>
+
+  <script>
+    const GEMINI_KEY = "AIzaSyDq8yv0a1IhX6C82W2D3KJkCeMaw8kv2Lo";
+const WEATHER_KEY = "b2c5b477f503ea54bffa1455a210ff49";
+    const GOOGLE_MAPS_KEY = "AIzaSyATew-TdTHzI9IZjizM8dOJxMBXPB6LRfE";
+
+    document.getElementById('tripForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const city = document.getElementById('city').value;
+      const startDate = document.getElementById('startDate').value;
+      const endDate = document.getElementById('endDate').value;
+      const travelType = document.getElementById('travelType').value;
+      const budget = document.getElementById('budget').value;
+
+      document.getElementById('results').innerHTML = "<p>Loading plan...</p>";
+
+      try {
+        // 1️⃣ Get recommended places from Gemini API
+        const placesResponse = await fetch(`https://api.openai.com/v1/responses`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${GEMINI_KEY}`
+          },
+          body: JSON.stringify({
+            model: "gemini-1",
+            input: `Suggest 5 best places to visit in ${city} for a ${travelType} traveler with ${budget} budget. Include name and a short description.`
+          })
+        });
+        const placesData = await placesResponse.json();
+        // Example parsing (depends on Gemini API structure)
+        const placesText = placesData.output_text || "";
+        const placesList = placesText.split('\n').filter(p => p.trim()).map(p => {
+          const splitIndex = p.indexOf(':');
+          return {
+            name: splitIndex !== -1 ? p.slice(0, splitIndex).trim() : p,
+            description: splitIndex !== -1 ? p.slice(splitIndex + 1).trim() : ''
+          };
+        });
+
+        // 2️⃣ Fetch weather forecast for each day
+        const start = new Date(startDate);
+        const end = new Date(endDate);
+        const weatherForecast = {};
+        for (let d = new Date(start); d <= end; d.setDate(d.getDate() + 1)) {
+          const dateStr = d.toISOString().split('T')[0];
+          const weatherResp = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${WEATHER_KEY}&units=metric`);
+          const weatherData = await weatherResp.json();
+          weatherForecast[dateStr] = `${weatherData.weather[0].description}, ${weatherData.main.temp}°C`;
+        }
+
+        // 3️⃣ Get image for each place from Google Maps
+        for (let place of placesList) {
+          const imgUrl = `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${encodeURIComponent(place.name)}&inputtype=textquery&fields=photos,formatted_address,name&key=${GOOGLE_MAPS_KEY}`;
+          const imgResp = await fetch(imgUrl);
+          const imgData = await imgResp.json();
+          if (imgData.candidates && imgData.candidates[0].photos) {
+            const photoRef = imgData.candidates[0].photos[0].photo_reference;
+            place.image = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${photoRef}&key=${GOOGLE_MAPS_KEY}`;
+          } else {
+            place.image = '';
+          }
+        }
+
+        // 4️⃣ Render results
+        let html = '';
+        placesList.forEach(place => {
+          html += `
+            <div class="place">
+              <h3>${place.name}</h3>
+              <p>${place.description}</p>
+              ${place.image ? `<img src="${place.image}" alt="${place.name}">` : ''}
+              <p><strong>Weather Forecast:</strong></p>
+              <ul>
+                ${Object.keys(weatherForecast).map(date => `<li>${date}: ${weatherForecast[date]}</li>`).join('')}
+              </ul>
+            </div>
+          `;
+        });
+        document.getElementById('results').innerHTML = html;
+        document.getElementById('downloadPDF').style.display = 'block';
+
+      } catch (err) {
+        console.error(err);
+        document.getElementById('results').innerHTML = "<p>Error generating trip plan.</p>";
+      }
+    });
+
+    document.getElementById('downloadPDF').addEventListener('click', () => {
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF();
+      let y = 10;
+      document.querySelectorAll('.place').forEach((place, i) => {
+        doc.setFontSize(14);
+        doc.text(place.querySelector('h3').innerText, 10, y);
+        y += 8;
+        doc.setFontSize(10);
+        doc.text(place.querySelector('p').innerText, 10, y);
+        y += 8;
+        const img = place.querySelector('img');
+        if (img) {
+          doc.addImage(img, 'JPEG', 10, y, 80, 50);
+          y += 55;
+        }
+        place.querySelectorAll('ul li').forEach(li => {
+          doc.text(li.innerText, 10, y);
+          y += 6;
+        });
+        y += 10;
+        if (y > 270) {
+          doc.addPage();
+          y = 10;
+        }
+      });
+      doc.save('TripPlan.pdf');
+    });
+  </script>
+</body>
+</html>

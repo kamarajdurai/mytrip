@@ -1,0 +1,184 @@
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #dff6ff, #f6f8ff);
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+.container {
+  max-width: 700px;
+  margin: 40px auto;
+  padding: 30px;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+  opacity: 0;
+  transform: translateY(40px);
+  animation: slideUpFade 0.8s ease forwards;
+}
+
+h2 {
+  text-align: center;
+  color: #2a2a2a;
+  margin-bottom: 25px;
+  font-size: 28px;
+  animation: fadeIn 1s ease forwards;
+}
+
+.input-section label {
+  display: block;
+  font-weight: bold;
+  margin-top: 15px;
+  color: #444;
+  transform: translateX(-20px);
+  opacity: 0;
+  animation: fadeSlideRight 0.7s ease forwards;
+}
+
+.input-section input, .input-section textarea {
+  width: 100%;
+  padding: 12px;
+  margin-top: 6px;
+  margin-bottom: 12px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 15px;
+  background: #f9f9f9;
+  transition: box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+.input-section input:focus, .input-section textarea:focus {
+  outline: none;
+  box-shadow: 0 0 8px #00a97f80;
+  transform: scale(1.02);
+}
+
+.options-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 12px;
+  margin: 10px 0 20px;
+}
+
+.option-card {
+  background: #ffffff;
+  border: 2px solid #e0e0e0;
+  border-radius: 14px;
+  text-align: center;
+  padding: 14px 10px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  opacity: 0;
+  animation: fadeInCard 0.4s ease forwards;
+}
+
+.option-card:nth-child(1){animation-delay:0.1s;}
+.option-card:nth-child(2){animation-delay:0.2s;}
+.option-card:nth-child(3){animation-delay:0.3s;}
+.option-card:nth-child(4){animation-delay:0.4s;}
+
+.option-card:hover {
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.1);
+}
+
+.option-card.active {
+  background: linear-gradient(135deg, #00a97f, #00c3a5);
+  color: white;
+  border-color: transparent;
+  box-shadow: 0 6px 14px rgba(0, 169, 127, 0.4);
+  transform: scale(1.05);
+}
+
+.option-card::after {
+  content: "";
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  top: 50%;
+  left: 50%;
+  background: rgba(255,255,255,0.3);
+  border-radius: 50%;
+  transform: scale(0);
+  opacity: 0;
+  transition: transform 0.4s ease, opacity 0.4s ease;
+}
+
+.option-card:active::after {
+  transform: scale(2);
+  opacity: 1;
+  transition: transform 0.4s ease, opacity 0.4s ease;
+}
+
+.input-section button, #downloadBtn {
+  background: linear-gradient(135deg, #00a97f, #00c3a5);
+  color: white;
+  border: none;
+  padding: 14px;
+  border-radius: 12px;
+  font-size: 16px;
+  width: 100%;
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.3s ease;
+  margin-top: 10px;
+}
+
+.input-section button:hover {
+  transform: scale(1.03);
+  box-shadow: 0 4px 15px rgba(0,169,127,0.4);
+  animation: pulse 1.2s infinite;
+}
+
+.output-box {
+  background-color: #fffef4;
+  border: 1px solid #e4e4e4;
+  border-radius: 12px;
+  padding: 20px;
+  margin-top: 30px;
+  color: #333;
+  font-size: 16px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
+  opacity: 0;
+  transform: scale(0.95);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.output-box.show {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.weather-animation {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  font-size: 50px;
+  z-index: 1000;
+  pointer-events: none;
+  opacity: 0;
+  animation: fadeIn 0.8s forwards, bounce 1s ease;
+}
+
+.weather-bg {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: -1;
+  transition: background 0.8s ease;
+}
+
+/* Animations */
+@keyframes slideUpFade { from { opacity: 0; transform: translateY(40px);} to { opacity: 1; transform: translateY(0);} }
+@keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
+@keyframes fadeSlideRight { from {opacity: 0; transform: translateX(-20px);} to {opacity: 1; transform: translateX(0);} }
+@keyframes fadeInCard { from {opacity:0; transform: scale(0.9);} to {opacity:1; transform: scale(1);} }
+@keyframes bounce { 0%, 100% { transform: translateY(0);} 50% { transform: translateY(-10px);} }
+@keyframes pulse { 0%{box-shadow:0 0 0 0 rgba(0,169,127,0.4);} 70%{box-shadow:0 0 0 12px rgba(0,169,127,0);} 100%{box-shadow:0 0 0 0 rgba(0,169,127,0);} }

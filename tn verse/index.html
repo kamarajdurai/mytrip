@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Premium Travel & Tourism + Instagram Feed</title>
+
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Navbar -->
+<header class="navbar" id="siteNavbar">
+  <div class="nav-inner">
+    <ul class="nav-menu">
+      <li><a class="nav-link" href="#"><i class="fa-solid fa-house"></i>Home</a></li>
+      <li><a class="nav-link" href="./ai api/index.html"><i class="fa-solid fa-route"></i>Plan Trip</a></li>
+      <li><a class="nav-link" href="#Experience"><i class="fa-solid fa-compass"></i>Experience</a></li>
+      <li><a class="nav-link" href="#"><i class="fa-solid fa-map-marker-alt"></i>Where to Go</a></li>
+    </ul>
+    <button id="hamburgerBtn" class="hamburger" aria-expanded="false">
+      <span class="bar"></span>
+    </button>
+  </div>
+</header>
+
+<!-- Slide-in panel -->
+<nav id="navPanel" class="panel" aria-hidden="true"></nav>
+
+<!-- Hero Section -->
+<section id="hero">
+  <div id="hero-content">
+    <div class="glow-circle-wrapper">
+      <img src="./src/logo .png" alt="Logo" class="circle-logo">
+    </div>
+    <h1>Explore the World in VR & AR</h1>
+    <p>Immersive Travel Experience at Your Fingertips</p>
+    <div class="hero-buttons">
+     <button class="btn-vr" onclick="window.location.href='../VR/index.html'">
+  <img src="https://cdn-icons-png.flaticon.com/512/1048/1048310.png" style="width:24px;height:24px;"> VR
+</button>
+
+<button class="btn-ar" onclick="window.location.href='../AR/index.html'">
+  <img src="https://cdn-icons-png.flaticon.com/512/1026/1026293.png" style="width:24px;height:24px;"> AR
+</button>
+
+    </div>
+  </div>
+</section>
+<section id="Experience">
+<!-- Instagram-style Gallery -->
+<div class="gallery" id="gallery" ></div>
+
+<!-- Modal -->
+<div class="modal" id="modal">
+  <span class="modal-close" id="modalClose">×</span>
+  <span class="modal-nav modal-prev" id="modalPrev">‹</span>
+  <img id="modalImg" src="" alt="Full View">
+  <span class="modal-nav modal-next" id="modalNext">›</span>
+</div>
+</section>
+
+<!-- Custom JS -->
+<script src="script.js"></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyATew-TdTHzI9IZjizM8dOJxMBXPB6LRfE&libraries=places&callback=initMap"></script>
+
+</body>
+</html>
